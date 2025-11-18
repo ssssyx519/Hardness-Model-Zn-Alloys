@@ -155,7 +155,7 @@ def rmse_metric(y_true, y_pred):
 def stepwise_feature_selection(X: pd.DataFrame,
                                y: pd.Series,
                                mi_series: pd.Series,
-                               cv: int = 10,
+                               cv: int = 5,
                                random_state: int = 10) -> pd.DataFrame:
     """
     Stepwise add features following MI ranking, computing RMSE via cross-validation.
@@ -175,8 +175,8 @@ def stepwise_feature_selection(X: pd.DataFrame,
         selected_features.append(feat)
 
         model = RandomForestRegressor(
-            n_estimators=100,
-            random_state=random_state,
+            n_estimators=200,
+            random_state=21,
             min_samples_split=4
         )
 
@@ -236,4 +236,5 @@ def run_feature_selection(data_path: str, target_col: str = None,
 # --------------------------- Run example ---------------------------
 if __name__ == "__main__":
     data = pd.read_excel('all_data.xlsx')
+
     run_feature_selection(data)
